@@ -1,36 +1,65 @@
-# smrnaseq
+# nf-core/smrnaseq
+
+
 
 ## 1. Software
 
 ### 1.1 Pipeline
 
-* Name: [nf-core/smrnaseq](https://nf-co.re/smrnaseq/)
-* Version: 2.4.0
-* System: Miarka
-* Deployed: No (`/proj/ngi2016004/private/remi/opt/nf-core-smrnaseq_2.4.0`)
+| Item       | Value |
+|-----------|-------|
+| Pipeline  | [nf-core/smrnaseq](https://nf-co.re/smrnaseq/) |
+| Version   | 2.4.0 |
+| System    | Miarka |
+| Deployed  | No (`/proj/ngi2016004/private/remi/opt/nf-core-smrnaseq_2.4.0`) |
 
+> Note: We skip fastp in 2.4.0 due to over-trimming (see issue below).
 
 ## 2. Input
 
-### 2.1 Sample data
+#### 2.1 Supported reference genomes
 
-* Library preps: [`Qiagen QIAseq miRNA`]
-* Sequencing platforms: [`Illumina NovaSeq X Plus`, `Illumina NextSeq`, `Illumina MiSeq`]
+| Species                     | Genome build | miRBase code |
+|----------------------------|--------------|--------------|
+| Homo sapiens               | GRCh38       | hsa          |
+| Mus musculus               | GRCm38       | mmu          |
+| Drosophila melanogaster    | dm6          | dme          |
 
-### 2.2 Reference data
+#### 2.2 miRBase data and genome paths
 
-* Reference genomes: [
-    `Homo sapiens (GRCh38 / hsa)`,
-    `Mus musculus (GRCm38 / mmu)`,
-    `Drosophila melanogaster (dm6 / dme)`
-]
-* miRBase: `/proj/ngi2016004/private/remi/genomes/miRBase-genomes_v22.1/miRBase/`
+| Item             | Path/Value |
+|------------------|------------|
+| miRBase root     | `/proj/ngi2016004/private/remi/genomes/miRBase-genomes_v22.1/miRBase/` |
+| Mature FASTA     | `CURRENT/mature.fa` (under miRBase root) |
+| Hairpin FASTA    | `CURRENT/hairpin.fa` (under miRBase root) |
+| miRNA annotation | `hsa.gff3`, `mmu.gff3`, `dme.gff3` (species-specific under miRBase root) |
+| Human genome FASTA | `/sw/data/uppnex/igenomes/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa` |
 
-// Reference genomes: `Species name (reference genome / miRBase name)`
+#### 2.3 Example paths (human)
+
+- Mature: `/vulpes/proj/ngis/ngi2016004/private/remi/genomes/miRBase-genomes_v22.1/miRBase/CURRENT/mature.fa`
+- Hairpin: `/vulpes/proj/ngis/ngi2016004/private/remi/genomes/miRBase-genomes_v22.1/miRBase/CURRENT/hairpin.fa`
+- miRNA GTF/GFF: `/vulpes/proj/ngis/ngi2016004/private/remi/genomes/miRBase-genomes_v22.1/miRBase/hsa.gff3`
+- GRCh38 FASTA: `/sw/data/uppnex/igenomes/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa`
+
 
 ## 3. Usage
 
+### 3.1 samplesheet
+
+There currently is no script generate a samplesheet automatically the standard DATA folders. 
+It will have to be created manually, e.g.:
+
+```csv
+sample,fastq_1,fastq_2
+P35756_1001,/path/to/P35756_1001_S1_L001_R1_001.fastq.gz,/path/to/P35756_1001_S1_L001_R2_001.fastq.gz
+P35756_1002,/path/to/P35756_1002_S2_L001_R1_001.fastq.gz,/path/to/P35756_1002_S2_L001_R2_001.fastq.gz
+...
 ```
+
+### 3.2 Nextflow run command
+
+```bash
 export NXF_SINGULARITY_CACHEDIR=/vulpes/proj/ngis/ngi2016004/private/remi/opt/nf-core-smrnaseq_2.4.0/singularity-images/
 nextflow run /vulpes/proj/ngis/ngi2016004/private/remi/opt/nf-core-smrnaseq_2.4.0/2_4_0 \
 --input samplesheet.csv \
@@ -85,6 +114,7 @@ Shown is an example of a nf-core/smrnaseq MultiQC report (MirTrace -> Contaminat
 ### 5.1 Non-default parameters
 
 The pipeline is run with the non-default options:
+
 * `--skip_fastp` -- This is used due a bug where version 2.4.0 over-eagerly trims reads, see: https://github.com/nf-core/smrnaseq/issues/503
 * `--skip_mirdeep` -- Skip optional step
 
