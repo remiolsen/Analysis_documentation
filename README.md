@@ -16,10 +16,8 @@ docs
 |   |   |-- edge_cases.md       # Less structured notes
 |   |   `-- external_comparisons_2025.pdf
 |   `-- index.md               # Main doc
-|-- smrnaseq                    # Pipeline 2
-|   `-- index.md
-|-- mkdocs.yml
-`-- README.md
+`-- smrnaseq                    # Pipeline 2
+    `-- index.md
 
 ```
 
