@@ -25,25 +25,25 @@ docs
 
 ## Mkdocs
 
-. To build or serve this documentation locally, ensure you have MkDocs installed. You can install it using pip:
+To build or serve this documentation locally, ensure you have MkDocs installed. You can install it using pip:
 
-    ```bash
-    pip install mkdocs
-    ```
+```bash
+pip install mkdocs
+```
 
-    Once installed, navigate to the repository's root directory and run:
+Once installed, navigate to the repository's root directory and run:
 
-    ```bash
-    mkdocs serve
-    ```
+```bash
+mkdocs serve
+```
 
-    This will start a local development server, and you can view the documentation in your browser at `http://127.0.0.1:8000/`. To build the static site, use:
+This will start a local development server, and you can view the documentation in your browser at `http://127.0.0.1:8000/`. To build the static site, use:
 
-    ```bash
-    mkdocs build
-    ```
+```bash
+mkdocs build
+```
 
-    The generated static files will be placed in the `site` directory.
+The generated static files will be placed in the `site` directory.
 
 ## Links
 
