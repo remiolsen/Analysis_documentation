@@ -125,7 +125,7 @@ Skipping fastp trimming makes it harder to rely on average size to determine the
 
 ### 5.3 Other genomes
 
-AS a rule, any analysis using a genome outside of the ones listed in section 2.2. has to be agreed upon before-hand with the user and the analysis area lead.
+As a rule, any analysis using a genome outside of the ones listed in section 2.2. has to be agreed upon before-hand with the user and the analysis area lead.
 
 ## 6. Links
 
